@@ -1,5 +1,0 @@
--r base.txt
-
-gunicorn
-whitenoise
-psycopg[binary]
