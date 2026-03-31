@@ -270,8 +270,8 @@
                         <span class="check-icon">âœ“</span>
                         <span>Logged in as <strong>{{ user.username }}</strong></span>
                     </div>
-                    <a href="{% url 'profile' %}" class="login-btn">Go to MFA Reset â†’</a>
-                    <a href="{% url 'cas_ng_logout' %}" class="logout-link">â† Log out</a>
+                    <a href="{% url 'profile' %}" class="login-btn">Go to MFA Reset</a>
+                    <a href="{% url 'cas_ng_logout' %}" class="logout-link">Log out</a>
                 {% else %}
                     <div class="gif-container">
                         <img src="{% static 'core/login_guide.gif' %}" alt="Login guide">
