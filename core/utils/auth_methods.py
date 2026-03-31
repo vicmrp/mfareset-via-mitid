@@ -41,14 +41,17 @@ def prepare_auth_methods(methods):
         else:
             details = str(method)
 
-        pretty.append(
-            {
-                "label": label,
-                "details": details,
-                "id": method.get("id", ""),
-                "type": odata_type,
-                "can_delete": can_delete,
-            }
-        )
+        # only add (show) the method if it can be deleted
+        if (can_delete):
+            pretty.append(
+                {
+                    "label": label,
+                    "details": details,
+                    "id": method.get("id", ""),
+                    "type": odata_type,
+                    "can_delete": can_delete,
+                }
+            )
+        
 
     return pretty

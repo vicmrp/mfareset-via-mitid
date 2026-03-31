@@ -22,7 +22,7 @@
         <div class="card">
             <div class="card-inner">
                 <div class="card-header">
-                    <h1>CAS Profile</h1>
+                    <h1>DTU Profile</h1>
                 </div>
 
                 <div class="already-logged-in" style="align-items: flex-start; margin-bottom: 2rem;">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <p class="section-title">Your current authentication methods</p>
+                <p class="section-title">Your current MFA methods</p>
 
                 {% if graph_error %}
                     <div class="error-box">
@@ -75,7 +75,7 @@
                 <button type="button" class="modal-btn modal-btn-cancel" id="cancel-reset-btn">
                     Cancel
                 </button>
-                <a href="{% url 'reset_mfa' %}" class="modal-btn modal-btn-confirm">
+                <a href="#" class="modal-btn modal-btn-confirm">
                     Confirm
                 </a>
             </div>
