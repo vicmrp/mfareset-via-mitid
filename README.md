@@ -4,7 +4,7 @@ Denne app giver en DTUBasebruger (en bruger med CPR) mulighed for at nulstille d
 
 <img src="core/static/core/login_guide.gif" alt="Login guide" width="500">
 
-## For udviklere
+## Kommandoer til at påbegynde udvikling eller vedligeholdelse af programmet:
 
 ```bash
 git clone https://github.com/vicre/mfareset-via-mitid
