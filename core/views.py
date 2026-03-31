@@ -4,6 +4,10 @@ from core.utils.graph import list_user_authentication_methods
 from core.utils.auth_methods import prepare_auth_methods
 import logging
 
+
+import time
+from django.http import JsonResponse
+
 logger = logging.getLogger(__name__)
 
 
@@ -38,3 +42,20 @@ def profile(request):
             "graph_error": graph_error,
         },
     )
+
+
+@login_required
+def reset_mfa(request):
+    # Real mfa reset method remains to be implemented
+
+    #### dummy response #####
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    time.sleep(5)  # simulate long-running reset
+
+    return JsonResponse({
+        "success": True,
+        "message": "MFA reset completed."
+    }, status=200)
+    #### dummy response #####

@@ -21,6 +21,7 @@
     <div class="page-content">
         <div class="card">
             <div class="card-inner">
+                {% csrf_token %}
                 <div class="card-header">
                     <h1>DTU Profile</h1>
                 </div>
@@ -57,6 +58,8 @@
                     <p class="no-methods">No authentication methods found.</p>
                 {% endif %}
 
+                <div id="reset-status" class="status-toast hidden"></div>
+
                 <div class="action-row">
                     <a href="#" class="login-btn" id="reset-mfa-btn">Reset MFA →</a>
                     <a href="{% url 'cas_ng_logout' %}" class="logout-link">← Log out</a>
@@ -75,9 +78,9 @@
                 <button type="button" class="modal-btn modal-btn-cancel" id="cancel-reset-btn">
                     Cancel
                 </button>
-                <a href="#" class="modal-btn modal-btn-confirm">
+                <button type="button" class="modal-btn modal-btn-confirm" id="confirm-reset-btn">
                     Confirm
-                </a>
+                </button>
             </div>
         </div>
     </div>
