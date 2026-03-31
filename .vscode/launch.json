@@ -6,7 +6,9 @@
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/manage.py",
-      "args": ["runserver"],
+      "args": [
+        "runserver"
+      ],
       "django": true,
       "justMyCode": true,
       "console": "integratedTerminal",
@@ -14,6 +16,27 @@
       "env": {
         "DJANGO_SETTINGS_MODULE": "config.settings"
       }
+    },
+    {
+      "name": "Browser Windows",
+      "runtimeExecutable": "C:\\chrome-win\\chrome.exe",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}/core",
+      "disableNetworkCache": true
+    },
+  ],
+
+  "compounds": [
+    {
+      // (5) Start All: run Next.js, attach to the router server, and open the browser
+      // If you also want to attach to the launcher on 9229, you can add that too
+      "name": "Start All Windows",
+      "configurations": [
+        "Django: runserver",
+        "Browser Windows",
+      ]
     }
   ]
 }
