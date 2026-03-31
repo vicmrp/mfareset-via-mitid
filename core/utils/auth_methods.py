@@ -1,10 +1,11 @@
-def prettify_auth_methods(methods):
+def prepare_auth_methods(methods):
     pretty = []
 
     for method in methods:
         odata_type = method.get("@odata.type", "")
         label = "Unknown method"
         details = ""
+        can_delete = False
 
         if odata_type.endswith("passwordAuthenticationMethod"):
             label = "Password"
@@ -14,18 +15,22 @@ def prettify_auth_methods(methods):
 
         elif odata_type.endswith("phoneAuthenticationMethod"):
             label = "Phone"
+            can_delete = True
             phone_type = method.get("phoneType", "")
             phone_number = method.get("phoneNumber", "")
             details = f"{phone_type}: {phone_number}"
 
         elif odata_type.endswith("microsoftAuthenticatorAuthenticationMethod"):
             label = "Microsoft Authenticator"
+            can_delete = True
             display_name = method.get("displayName", "")
             device_tag = method.get("deviceTag", "")
             details = f"{display_name} ({device_tag})"
 
+
         elif odata_type.endswith("softwareOathAuthenticationMethod"):
             label = "Software OATH token"
+            can_delete = True
 
         elif odata_type.endswith("windowsHelloForBusinessAuthenticationMethod"):
             label = "Windows Hello for Business"
@@ -42,8 +47,8 @@ def prettify_auth_methods(methods):
                 "details": details,
                 "id": method.get("id", ""),
                 "type": odata_type,
+                "can_delete": can_delete,
             }
         )
 
     return pretty
-
