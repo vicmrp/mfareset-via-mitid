@@ -43,9 +43,7 @@
   ],
   "compounds": [
     {
-      // (5) Start All: run Next.js, attach to the router server, and open the browser
-      // If you also want to attach to the launcher on 9229, you can add that too
-      "name": "Start All Windows",
+      "name": "Start All",
       "configurations": [
         "Django: runserver",
         "Browser Windows",
