@@ -27,15 +27,13 @@
       "disableNetworkCache": true
     },
     {
-      "name": "core.scripts.test_graph",
+      "name": "Run Test Script",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/manage.py",
       "args": [
         "runscript",
-        "test_graph",
-        "--script-args",
-        "vicre@dtu.dk"
+        "test_script"
       ],
       "django": true,
       "justMyCode": true
@@ -43,7 +41,7 @@
   ],
   "compounds": [
     {
-      "name": "Start All",
+      "name": "Start Server and Browser",
       "configurations": [
         "Django: runserver",
         "Browser Windows",

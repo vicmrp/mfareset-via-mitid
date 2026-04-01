@@ -1,7 +1,7 @@
 from pprint import pprint
 
-from core.utils.graph import print_hello_world, list_user_authentication_methods
-
+from core.utils.graph import list_user_authentication_methods
+from core.utils.auth_methods import prepare_auth_methods
 
 def run(*args):
 
@@ -10,5 +10,11 @@ def run(*args):
 
     methods = list_user_authentication_methods(upn)
 
+    mfa_methods = prepare_auth_methods(methods)
+
+    
+
+
+
     print("Returned methods:")
-    pprint(methods)
+    pprint(mfa_methods)
