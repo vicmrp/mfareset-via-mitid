@@ -51,6 +51,23 @@ def graph_get(url: str) -> dict[str, Any]:
     return response.json()
 
 
+# A helper function used in delete_user_authentication_method() below
+def graph_delete(url: str) -> None:
+    token = get_app_access_token()
+    response = requests.delete(
+        url,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/json",
+        },
+        timeout=30,
+    )
+
+    if response.status_code != 204:
+        raise RuntimeError(
+            f"Graph DELETE failed: {response.status_code} - {response.text}"
+        )
+
 
 
 def list_user_authentication_methods(user_principal_name: str) -> list[dict[str, Any]]:
@@ -62,12 +79,29 @@ def list_user_authentication_methods(user_principal_name: str) -> list[dict[str,
     return data.get("value", [])
 
 
-def delete_user_authentication_method(authentication_method_id):
-    pass
-#     user_principal_name: str, authentication_method_id: str
-# ) -> None:
-#     url = (
-#         "https://graph.microsoft.com/v1.0/"
-#         f"users/{user_principal_name}/authentication/methods/{authentication_method_id}"
-#     )
-#     graph_delete(url)
+def delete_user_authentication_method(
+    user_principal_name: str,
+    authentication_method_id: str,
+    authentication_method_type: str,
+) -> None:
+    base_url = (
+        "https://graph.microsoft.com/v1.0/"
+        f"users/{user_principal_name}/authentication"
+    )
+
+    if authentication_method_type.endswith("phoneAuthenticationMethod"):
+        url = f"{base_url}/phoneMethods/{authentication_method_id}"
+
+    elif authentication_method_type.endswith("softwareOathAuthenticationMethod"):
+        url = f"{base_url}/softwareOathMethods/{authentication_method_id}"
+
+    elif authentication_method_type.endswith("microsoftAuthenticatorAuthenticationMethod"):
+        url = f"{base_url}/microsoftAuthenticatorMethods/{authentication_method_id}"
+
+    else:
+        raise ValueError(
+            f"Unsupported deletable authentication method type: "
+            f"{authentication_method_type}"
+        )
+
+    graph_delete(url)

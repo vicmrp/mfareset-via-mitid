@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from core.utils.graph import list_user_authentication_methods
 from core.utils.auth_methods import prepare_auth_methods
+from core.utils.reset_mfa import reset_mfa_methods
 import logging
 
 
@@ -46,16 +47,23 @@ def profile(request):
 
 @login_required
 def reset_mfa(request):
-    # Real mfa reset method remains to be implemented
-
-    #### dummy response #####
     if request.method != "POST":
         return JsonResponse({"error": "Method not allowed"}, status=405)
 
-    time.sleep(5)  # simulate long-running reset
+    try:
+        upn = request.user.username  # or your resolved UPN field
+        methods = list_user_authentication_methods(upn)
+        mfa_methods = prepare_auth_methods(methods)
 
-    return JsonResponse({
-        "success": True,
-        "message": "MFA reset completed."
-    }, status=200)
-    #### dummy response #####
+        message = reset_mfa_methods(upn, mfa_methods)
+
+        return JsonResponse({
+            "success": True,
+            "message": message,
+        }, status=200)
+
+    except Exception as exc:
+        return JsonResponse({
+            "success": False,
+            "message": str(exc),
+        }, status=500)
