@@ -1,3 +1,7 @@
 todo: 27-03-2026 Add logging so you can see errors in django - confirm by having a url that triggers a logging
 
 todo: 27-03-2026 Once the user is authenticated, then show his or her's username and a list of each mfa method. Then have a button that deletes all Second factor methods (whitelist: phone, mfa app, thirdparty mfa app).
+
+todo: log failed mfa reset's and put them in a model, for debugging
+todo: log who logs in with mitID successfully and unsuccessfully, to get a ratio of users that logged and then reset mfa versus did not.
+todo: log the mfa methods attempted to delete, and also log all the types of authentication methods the user had. But without storing details like phonenumber and type of phone device. This can be useful to see if the user had unimplemented solution to delete the mfa type.
